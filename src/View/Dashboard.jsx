@@ -131,8 +131,8 @@ export default function Dashboard() {
 
           {/* main */}
           <div>
-            <img src={patternBgDesktop} alt="background" className="hidden lg:block h-[15.5rem] w-full object-fill" />
-            <img src={patternBgMobile} alt="background" className="lg:hidden h-[13.5rem] w-full object-fill" />
+            <img src={patternBgDesktop} alt="background" className="hidden lg:block h-[15.5rem] w-full object-cover"/>
+            <img src={patternBgMobile} alt="background" className="lg:hidden h-[13.5rem] w-full object-cover"/>
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full bg-gradient-to-r from-[#453f9a] to-[#5f87f2]" id="map">
