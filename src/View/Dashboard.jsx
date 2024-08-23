@@ -13,7 +13,7 @@ export default function Dashboard() {
   const [timezone, setTimezone] = useState('');
   const [Currency, setCurrency] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [isCentered, setIsCentered] = useState(false);
+  const [Centered, setIsCentered] = useState(false);
 
   const mapOptions = {
     zoomControl: true,
@@ -24,8 +24,11 @@ export default function Dashboard() {
     fullscreenControl: false,
   };
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  const handleInputChange = (event) => { 
+    const charCode = event.target.value.length === 0 ? 0 : event.target.value.charCodeAt(event.target.value.length - 1);
+    if (charCode > 48 && charCode < 57 || charCode === 46 || charCode === 0) {
+      setInputValue(event.target.value);
+    }
   };
 
   const handleButtonClick = () => {
@@ -106,10 +109,14 @@ export default function Dashboard() {
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full" id="map">
-              {!isCentered &&
+              {!Centered &&
                 <Map defaultZoom={10} defaultCenter={position} options={mapOptions} mapId={mapID} on>
                   <AdvancedMarker position={position} />
                 </Map>
+                || Centered && 
+                <div className="text-center mt-[20rem] lg:mt-[10rem]">
+                  <p>loading...</p>
+                </div>
               }
             </div>
           </APIProvider>
