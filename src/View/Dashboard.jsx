@@ -1,5 +1,5 @@
 import { AdvancedMarker, APIProvider, Map } from "@vis.gl/react-google-maps";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as SVG } from "../images/icon-arrow.svg";
 import patternBgDesktop from '../images/pattern-bg-desktop.png';
 import patternBgMobile from '../images/pattern-bg-mobile.png';
@@ -7,13 +7,13 @@ import patternBgMobile from '../images/pattern-bg-mobile.png';
 export default function Dashboard() {
   const [apiKey] = useState(process.env.REACT_APP_MAPSAPI);
   const [mapID] = useState(process.env.REACT_APP_MAPID);
-  const [position, setPosition] = useState({ lat: -7.796275454959813, lng: 110.3726123424664 });
+  const [position, setPosition] = useState();
   const [IPAddressVar, setIPAddress] = useState('');
   const [Location, setLocation] = useState('');
   const [timezone, setTimezone] = useState('');
   const [Currency, setCurrency] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [Centered, setIsCentered] = useState(false);
+  const [centered, setCentered] = useState(false);
 
   const mapOptions = {
     zoomControl: true,
@@ -23,6 +23,23 @@ export default function Dashboard() {
     rotateControl: true,
     fullscreenControl: false,
   };
+
+  useEffect(() => {
+    setCentered(true);
+    fetch('https://freeipapi.com/api/json/', {
+      method: "GET"
+    })  
+      .then(response => response.json())
+      .then((data) => {
+        setPosition({lat: data.latitude, lng: data.longitude});
+        setIPAddress(data.ipAddress);
+        setLocation(`${data.countryName}, ${data.regionName}, ${data.cityName}`);
+        setTimezone(`${data.timeZones[0]} ${data.timeZone}`);
+        setCurrency(`${data.currency.code}, ${data.currency.name}`);
+        setCentered(false);
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   const handleInputChange = (event) => { 
       setInputValue(event.target.value);
@@ -42,7 +59,7 @@ export default function Dashboard() {
       return;
     }
 
-    setIsCentered(true);
+    setCentered(true);
     fetch(`https://freeipapi.com/api/json/${inputValue.trim()}`, {
       method: "GET"
     })  
@@ -50,7 +67,7 @@ export default function Dashboard() {
       .then((data) => {
         if (!data.latitude) {
           alert("Invalid IP Address or data unavailable.");
-          setIsCentered(false);
+          setCentered(false);
           return;
         }
         
@@ -59,7 +76,7 @@ export default function Dashboard() {
         setLocation(`${data.countryName}, ${data.regionName}, ${data.cityName}`);
         setTimezone(`${data.timeZones[0]} ${data.timeZone}`);
         setCurrency(`${data.currency.code}, ${data.currency.name}`);
-        setIsCentered(false);
+        setCentered(false);
       })
       .catch(error => console.error(error));
   };
@@ -119,11 +136,11 @@ export default function Dashboard() {
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full" id="map">
-              {(!Centered &&
+              {(!centered &&
                 <Map defaultZoom={10} defaultCenter={position} options={mapOptions} mapId={mapID} on>
                   <AdvancedMarker position={position} />
                 </Map>
-              )|| (Centered && 
+              )|| (centered && 
                 <div className="text-center mt-[20rem] lg:mt-[10rem]">
                   <p>loading...</p>
                 </div>
