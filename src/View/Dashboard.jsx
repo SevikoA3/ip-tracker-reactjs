@@ -83,10 +83,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="h-dvh w-screen flex justify-center items-center">
+      <div className="h-dvh w-screen flex justify-center items-center bg-gradient-to-r from-[#5f87f2] to-[#453f9a]">
 
-        {/* relative */}
-        <div className="flex flex-col w-full h-full lg:w-[80vw] lg:h-[85vh] overflow-hidden shadow-lg relative">
+        <div className="flex flex-col w-full h-full lg:w-[80vw] lg:h-[85vh] overflow-hidden lg:rounded-2xl shadow-lg relative">
+          {/* absolute */}
           <div className="absolute w-full lg:w-[80vw] lg:h-[30vh] text-center z-10 top-0">
             <div className="flex items-center flex-col">
               <h1 className="font-semibold mt-2 lg:mt-5 text-3xl text-white">IP Address Tracker</h1>
@@ -135,14 +135,14 @@ export default function Dashboard() {
             <img src={patternBgMobile} alt="background" className="lg:hidden h-[13.5rem] w-full object-fill" />
           </div>
           <APIProvider apiKey={apiKey}>
-            <div className="w-full h-full" id="map">
+            <div className="w-full h-full bg-gradient-to-r from-[#453f9a] to-[#5f87f2]" id="map">
               {(!centered &&
                 <Map defaultZoom={10} defaultCenter={position} options={mapOptions} mapId={mapID} on>
                   <AdvancedMarker position={position} />
                 </Map>
               )|| (centered && 
-                <div className="text-center mt-[20rem] lg:mt-[10rem]">
-                  <p>loading...</p>
+                <div className="text-center mt-[16rem] lg:mt-[12rem]">
+                  <p className="text-white text-3xl">loading...</p>
                 </div>
               )}
             </div>
