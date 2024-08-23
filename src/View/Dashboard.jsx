@@ -56,14 +56,14 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="h-screen w-screen flex justify-center items-center">
+      <div className="h-dvh w-screen flex justify-center items-center">
 
         {/* relative */}
         <div className="flex flex-col w-full h-full lg:w-[80vw] lg:h-[85vh] overflow-hidden shadow-lg relative">
           <div className="absolute w-full lg:w-[80vw] lg:h-[30vh] text-center z-10 top-0">
             <div className="flex items-center flex-col">
-              <h1 className="font-semibold pt-5 pb-10 text-3xl text-white">IP Address Tracker</h1>
-              <div className="flex justify-center w-10/12 lg:w-[24rem]">
+              <h1 className="font-semibold mt-2 lg:mt-5 text-3xl text-white">IP Address Tracker</h1>
+              <div className="flex justify-center w-10/12 lg:w-[24rem] mt-2 lg:mt-5">
                 <input
                   type="text"
                   className="w-full h-10 rounded-l-md pl-4"
@@ -80,23 +80,23 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <div className="flex justify-center text-left h-[25rem] lg:h-[12rem]">
-              <div className="grid sl:grid-rows-4 lg:grid-cols-4 divide-y lg:divide-x mt-10 bg-white w-10/12 rounded-3xl">
-                <div className="p-5 h-full">
-                  <p className="text-black">IP Address</p>
-                  <p className="text-black font-semibold">{IPAddressVar}</p>
+            <div className="flex justify-center text-left lg:h-[12rem] mt-3 lg:mt-10">
+              <div className="grid   lg:grid-cols-4 lg:divide-x bg-white w-10/12 rounded-3xl">
+                <div className="pt-2 lg:p-5 h-full">
+                  <p className="text-xs lg:text-lg text-black text-center lg:text-left">IP Address</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{IPAddressVar}</p>
                 </div>
-                <div className="p-5 h-full">
-                  <p className="text-black">Location</p>
-                  <p className="text-black font-semibold">{Location}</p>
+                <div className="pt-1 lg:p-5 h-full">
+                  <p className="text-xs lg:text-lg text-black text-center lg:text-left">Location</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{Location}</p>
                 </div>
-                <div className="p-5 h-full">
-                  <p className="text-black">Timezone</p>
-                  <p className="text-black font-semibold">{timezone}</p>
+                <div className="pt-1 lg:p-5 h-full">
+                  <p className="text-xs lg:text-lg text-black text-center lg:text-left">Timezone</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{timezone}</p>
                 </div>
-                <div className="lg:border-t-transparent p-5 h-full">
-                  <p className="text-black">Currency</p>
-                  <p className="text-black font-semibold">{Currency}</p>
+                <div className="lg:border-t-transparent pt-1 lg:p-5 h-full">
+                  <p className="text-xs lg:text-lg text-black text-center lg:text-left">Currency</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{Currency}</p>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
           {/* main */}
           <div>
             <img src={patternBgDesktop} alt="background" className="hidden lg:block h-[15.5rem] w-full object-fill" />
-            <img src={patternBgMobile} alt="background" className="lg:hidden h-[22.4rem] w-full object-fill" />
+            <img src={patternBgMobile} alt="background" className="lg:hidden h-[13.5rem] w-full object-fill" />
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full" id="map">
