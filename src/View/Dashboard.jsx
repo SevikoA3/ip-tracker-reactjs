@@ -35,7 +35,7 @@ export default function Dashboard() {
     })  
       .then(response => response.json())
       .then((data) => {
-        if (data.latitude == '') {
+        if (data.latitude === '') {
           alert("Invalid IP Address");
           setIsCentered(false);
           return
