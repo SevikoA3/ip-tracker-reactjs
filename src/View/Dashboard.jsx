@@ -7,7 +7,6 @@ import patternBgMobile from '../images/pattern-bg-mobile.png';
 export default function Dashboard() {
   const [apiKey] = useState(process.env.REACT_APP_MAPSAPI);
   const [mapID] = useState(process.env.REACT_APP_MAPID);
-  const [ipApi] = useState(process.env.REACT_APP_IPAPI);
   const [position, setPosition] = useState({ lat: -7.796275454959813, lng: 110.3726123424664 });
   const [IPAddressVar, setIPAddress] = useState('');
   const [Location, setLocation] = useState('');
