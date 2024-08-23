@@ -111,19 +111,19 @@ export default function Dashboard() {
               <div className="grid lg:grid-cols-4 lg:divide-x bg-white w-10/12 rounded-3xl">
                 <div className="pt-2 lg:p-5 h-full">
                   <p className="text-xs lg:text-lg text-black text-center lg:text-left">IP Address</p>
-                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{IPAddressVar}</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-words font-semibold">{IPAddressVar}</p>
                 </div>
                 <div className="pt-1 lg:p-5 h-full">
                   <p className="text-xs lg:text-lg text-black text-center lg:text-left">Location</p>
-                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{Location}</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-words font-semibold">{Location}</p>
                 </div>
                 <div className="pt-1 lg:p-5 h-full">
                   <p className="text-xs lg:text-lg text-black text-center lg:text-left">Timezone</p>
-                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{timezone}</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-words font-semibold">{timezone}</p>
                 </div>
                 <div className="lg:border-t-transparent pt-1 lg:p-5 h-full">
                   <p className="text-xs lg:text-lg text-black text-center lg:text-left">Currency</p>
-                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{Currency}</p>
+                  <p className="text-center lg:text-left text-black text-sm px-4 lg:px-0 py-2 lg:pt-3 lg:text-lg break-words font-semibold">{Currency}</p>
                 </div>
               </div>
             </div>
