@@ -35,10 +35,12 @@ export default function Dashboard() {
     })  
       .then(response => response.json())
       .then((data) => {
-        if (data.status === "fail") {
+        if (data.latitude == '') {
           alert("Invalid IP Address");
+          setIsCentered(false);
           return
         }
+        
         setPosition({lat: data.latitude, lng: data.longitude});
         setIPAddress(data.ipAddress);
         setLocation(`${data.countryName}, ${data.regionName}, ${data.cityName}`);
