@@ -25,23 +25,33 @@ export default function Dashboard() {
   };
 
   const handleInputChange = (event) => { 
-    const charCode = event.target.value.length === 0 ? 0 : event.target.value.charCodeAt(event.target.value.length - 1);
-    if ((charCode > 48 && charCode < 57) || charCode === 46 || charCode === 0) {
       setInputValue(event.target.value);
-    }
+  };
+
+  const validateIPAddress = (ip) => {
+    // Regular expressions for IPv4 and IPv6
+    const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
+    const ipv6Pattern = /^([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4}|:)$/;
+
+    return ipv4Pattern.test(ip) || ipv6Pattern.test(ip);
   };
 
   const handleButtonClick = () => {
+    if (!validateIPAddress(inputValue.trim())) {
+      alert("Please enter a valid IP Address.");
+      return;
+    }
+
     setIsCentered(true);
     fetch(`https://freeipapi.com/api/json/${inputValue.trim()}`, {
       method: "GET"
     })  
       .then(response => response.json())
       .then((data) => {
-        if (data.latitude === '') {
-          alert("Invalid IP Address");
+        if (!data.latitude) {
+          alert("Invalid IP Address or data unavailable.");
           setIsCentered(false);
-          return
+          return;
         }
         
         setPosition({lat: data.latitude, lng: data.longitude});
@@ -80,8 +90,8 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <div className="flex justify-center text-left lg:h-[12rem] mt-3 lg:mt-10">
-              <div className="grid   lg:grid-cols-4 lg:divide-x bg-white w-10/12 rounded-3xl">
+            <div className="flex justify-center text-left min-h-[12rem] lg:h-[12rem] mt-3 lg:mt-10">
+              <div className="grid lg:grid-cols-4 lg:divide-x bg-white w-10/12 rounded-3xl">
                 <div className="pt-2 lg:p-5 h-full">
                   <p className="text-xs lg:text-lg text-black text-center lg:text-left">IP Address</p>
                   <p className="text-center lg:text-left text-black text-sm px-4 py-2 lg:pt-3 lg:text-lg break-all font-semibold">{IPAddressVar}</p>
