@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [IPAddressVar, setIPAddress] = useState('');
   const [Location, setLocation] = useState('');
   const [timezone, setTimezone] = useState('');
-  const [ISP, setISP] = useState('');
+  const [Currency, setCurrency] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [isCentered, setIsCentered] = useState(false);
 
@@ -30,7 +30,7 @@ export default function Dashboard() {
 
   const handleButtonClick = () => {
     setIsCentered(true);
-    fetch(`http://ip-api.com/json/${inputValue.trim()}?fields=59337`, {
+    fetch(`https://freeipapi.com/api/json/${inputValue.trim()}`, {
       method: "GET"
     })  
       .then(response => response.json())
@@ -39,12 +39,11 @@ export default function Dashboard() {
           alert("Invalid IP Address");
           return
         }
-        console.log(data);
-        setPosition({lat: data.lat, lng: data.lon});
-        setIPAddress(data.query);
-        setLocation(`${data.country}, ${data.regionName}`);
-        setTimezone(data.timezone);
-        setISP(data.isp);
+        setPosition({lat: data.latitude, lng: data.longitude});
+        setIPAddress(data.ipAddress);
+        setLocation(`${data.countryName}, ${data.regionName}, ${data.cityName}`);
+        setTimezone(`${data.timeZones[0]} ${data.timeZone}`);
+        setCurrency(`${data.currency.code}, ${data.currency.name}`);
         setIsCentered(false);
       })
       .catch(error => console.error(error));
@@ -91,8 +90,8 @@ export default function Dashboard() {
                   <p className="text-black font-semibold">{timezone}</p>
                 </div>
                 <div className="lg:border-t-transparent p-5 h-full">
-                  <p className="text-black">ISP</p>
-                  <p className="text-black font-semibold">{ISP}</p>
+                  <p className="text-black">Currency</p>
+                  <p className="text-black font-semibold">{Currency}</p>
                 </div>
               </div>
             </div>
