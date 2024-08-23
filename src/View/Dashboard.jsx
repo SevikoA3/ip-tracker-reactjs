@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   const handleInputChange = (event) => { 
     const charCode = event.target.value.length === 0 ? 0 : event.target.value.charCodeAt(event.target.value.length - 1);
-    if (charCode > 48 && charCode < 57 || charCode === 46 || charCode === 0) {
+    if ((charCode > 48 && charCode < 57) || charCode === 46 || charCode === 0) {
       setInputValue(event.target.value);
     }
   };
@@ -109,15 +109,15 @@ export default function Dashboard() {
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full" id="map">
-              {!Centered &&
+              {(!Centered &&
                 <Map defaultZoom={10} defaultCenter={position} options={mapOptions} mapId={mapID} on>
                   <AdvancedMarker position={position} />
                 </Map>
-                || Centered && 
+              )|| (Centered && 
                 <div className="text-center mt-[20rem] lg:mt-[10rem]">
                   <p>loading...</p>
                 </div>
-              }
+              )}
             </div>
           </APIProvider>
         </div>
