@@ -31,37 +31,21 @@ export default function Dashboard() {
 
   const handleButtonClick = () => {
     setIsCentered(true);
-    fetch(`http://ip-api.com/json/${inputValue}?fields=59337`, {
+    fetch(`http://ip-api.com/json/${inputValue.trim()}?fields=59337`, {
       method: "GET"
     })  
       .then(response => response.json())
       .then((data) => {
-        const ip = data.query;
-        return fetch(`https://api.ipbase.com/v2/info?apikey=${ipApi}&ip=${ip}`, {
-          method: "GET"
-        });
-      })
-      .then(response => response.json())
-      .then((data) => {        
-        
-        if (data.data == null) {
+        if (data.status === "fail") {
           alert("Invalid IP Address");
-          setIsCentered(false);
-          return;
+          return
         }
-
-        // setPosition({lat: data.lat, lng: data.lon});
-        // setIPAddress(data.query);
-        // setLocation(`${data.country}, ${data.regionName}`);
-        // setTimezone(data.timezone);
-        // setISP(data.isp);
-
-        setPosition({ lat: data.data.location.latitude, lng: data.data.location.longitude });
-        setIPAddress(data.data.ip);
-        setLocation(`${data.data.location.country.name}, ${data.data.location.city.name}`);
-        setTimezone(data.data.timezone.id);
-        setISP(data.data.connection.organization);
-
+        console.log(data);
+        setPosition({lat: data.lat, lng: data.lon});
+        setIPAddress(data.query);
+        setLocation(`${data.country}, ${data.regionName}`);
+        setTimezone(data.timezone);
+        setISP(data.isp);
         setIsCentered(false);
       })
       .catch(error => console.error(error));
@@ -93,7 +77,7 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <div className="flex justify-center text-left h-[22rem] lg:h-[12rem]">
+            <div className="flex justify-center text-left h-[25rem] lg:h-[12rem]">
               <div className="grid sl:grid-rows-4 lg:grid-cols-4 divide-y lg:divide-x mt-10 bg-white w-10/12 rounded-3xl">
                 <div className="p-5 h-full">
                   <p className="text-black">IP Address</p>
@@ -107,7 +91,7 @@ export default function Dashboard() {
                   <p className="text-black">Timezone</p>
                   <p className="text-black font-semibold">{timezone}</p>
                 </div>
-                <div className="border-t-transparent p-5 h-full">
+                <div className="lg:border-t-transparent p-5 h-full">
                   <p className="text-black">ISP</p>
                   <p className="text-black font-semibold">{ISP}</p>
                 </div>
@@ -118,7 +102,7 @@ export default function Dashboard() {
           {/* main */}
           <div>
             <img src={patternBgDesktop} alt="background" className="hidden lg:block h-[15.5rem] w-full object-fill" />
-            <img src={patternBgMobile} alt="background" className="lg:hidden h-[22rem] w-full object-fill" />
+            <img src={patternBgMobile} alt="background" className="lg:hidden h-[22.4rem] w-full object-fill" />
           </div>
           <APIProvider apiKey={apiKey}>
             <div className="w-full h-full" id="map">
